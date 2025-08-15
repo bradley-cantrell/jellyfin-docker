@@ -1,0 +1,54 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: jellyfin
+    user: 1002:1002
+    networks:
+      - web
+    volumes:
+      - /mnt/sandisk4tb/jellyfin/config:/config
+      - /mnt/sandisk4tb/jellyfin/cache:/cache
+      - type: bind
+        source: /mnt/sandisk4tb/music
+        target: /music
+        read_only: false
+      - type: bind
+        source: /mnt/sandisk4tb/tv_movies
+        target: /tv_movies
+        read_only: false
+      - type: bind
+        source: /mnt/sandisk4tb/books
+        target: /books
+        read_only: false
+    restart: 'unless-stopped'
+    # Optional - alternative address used for autodiscovery
+    environment:
+      - JELLYFIN_PublishedServerUrl=https://music.cantrellbl.dev
+    # Optional - may be necessary for docker healthcheck to pass if running in host network mode
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+
+  caddy:
+    build: .
+    restart: unless-stopped
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./conf:/etc/caddy
+      - ./site:/srv
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      - web
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  web:
+    driver: bridge
