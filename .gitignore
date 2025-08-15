@@ -1,7 +1,6 @@
 .env
 *env
 env*
-conf
 config*
 cache*
 site*
