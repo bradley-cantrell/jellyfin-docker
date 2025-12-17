@@ -13,12 +13,16 @@ services:
         target: /music
         read_only: false
       - type: bind
-        source: /mnt/sandisk4tb/tv_movies
-        target: /tv_movies
+        source: /mnt/sandisk4tb/tv_shows
+        target: /tv_shows
         read_only: false
       - type: bind
         source: /mnt/sandisk4tb/books
         target: /books
+        read_only: false
+      - type: bind
+        source: /mnt/sandisk4tb/movies
+        target: /movies
         read_only: false
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
