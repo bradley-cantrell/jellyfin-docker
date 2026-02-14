@@ -29,7 +29,7 @@ services:
       - 'host.docker.internal:host-gateway'
 
   caddy:
-    build: .
+    image: serfriz/caddy-cloudflare-ddns:latest
     restart: unless-stopped
     ports:
       - "80:80"
@@ -40,6 +40,8 @@ services:
       - ./site:/srv
       - caddy_data:/data
       - caddy_config:/config
+    environment:
+      - CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN}
     networks:
       - web
 
