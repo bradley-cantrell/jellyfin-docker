@@ -28,7 +28,7 @@ services:
         source: /mnt/sandisk4tb/podcasts
         target: /podcasts
         read_only: false
-      restart: 'unless-stopped'
+    restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
       - JELLYFIN_PublishedServerUrl=https://music.cantrellbl.dev
