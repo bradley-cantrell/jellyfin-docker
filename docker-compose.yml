@@ -24,6 +24,9 @@ services:
         source: /mnt/sandisk4tb/movies
         target: /movies
         read_only: false
+      - type: bind
+        source: /mnt/sandisk4tb/podcasts
+        read_only: false
     restart: 'unless-stopped'
     # Optional - alternative address used for autodiscovery
     environment:
