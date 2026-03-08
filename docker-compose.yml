@@ -6,26 +6,26 @@ services:
     networks:
       - web
     volumes:
-      - /mnt/sandisk4tb/jellyfin/config:/config
-      - /mnt/sandisk4tb/jellyfin/cache:/cache
+      - /mnt/media/jellyfin/config:/config
+      - /mnt/media/jellyfin/cache:/cache
       - type: bind
-        source: /mnt/sandisk4tb/music
+        source: /mnt/media/music
         target: /music
         read_only: false
       - type: bind
-        source: /mnt/sandisk4tb/tv_shows
+        source: /mnt/media/tv_shows
         target: /tv_shows
         read_only: false
       - type: bind
-        source: /mnt/sandisk4tb/books
+        source: /mnt/media/books
         target: /books
         read_only: false
       - type: bind
-        source: /mnt/sandisk4tb/movies
+        source: /mnt/media/movies
         target: /movies
         read_only: false
       - type: bind
-        source: /mnt/sandisk4tb/podcasts
+        source: /mnt/media/podcasts
         target: /podcasts
         read_only: false
     restart: 'unless-stopped'
